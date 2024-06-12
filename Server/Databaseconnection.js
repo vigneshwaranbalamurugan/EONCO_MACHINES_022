@@ -15,6 +15,9 @@ async function connectToMongoDB() {
     }
 }
 
+export async function getDb() {
+  await db.close();
+}
 
 export async function getDb() {
     await connectToMongoDB();
