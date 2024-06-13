@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDb} from '../Databaseconnection.js';
+import { closeConnection, getDb} from '../Databaseconnection.js';
 const Hospital_Router = express.Router();
 
 Hospital_Router.post('',async (req,res) => {
@@ -15,6 +15,8 @@ Hospital_Router.post('',async (req,res) => {
         res.status(201).json({ message: 'Hospital created successfully.' });
     } catch (error) {
     res.status(500).json({ message: 'Error creating hospital' }); 
+    }finally{
+        await closeConnection();
     }
 });
 

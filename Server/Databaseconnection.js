@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb';
 
-let db;
+let db,client;
 
 async function connectToMongoDB() {
     try {
-      const client = await MongoClient.connect(process.env.MONGODB_URL, {
+      client = await MongoClient.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
@@ -15,8 +15,10 @@ async function connectToMongoDB() {
     }
 }
 
-export async function getDb() {
-  await db.close();
+export async function closeConnection() {
+  if(client){
+  await client.close();
+  }
 }
 
 export async function getDb() {
