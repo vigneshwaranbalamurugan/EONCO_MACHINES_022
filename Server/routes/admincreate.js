@@ -1,7 +1,6 @@
 import express from 'express';
 import { getDb,closeConnection} from '../Databaseconnection.js';
 import bcrypt from "bcryptjs";
-import { MongoClient } from 'mongodb';
 
 const Admin_Router = express.Router();
 
@@ -20,7 +19,7 @@ Admin_Router.post('',async(req,res)=>{
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        await collections[0].insertOne({ email:email,hospital:validBranch._id,password:hashedPassword.replace,Roll:roll});
+        await collections[0].insertOne({ email:email,hospital:validBranch._id,password:hashedPassword,Roll:roll});
         return res.status(201).json({ message: 'Admin Created Sucessfully.' });
     }catch (error) {
         console.error('Error creating admin:', error);

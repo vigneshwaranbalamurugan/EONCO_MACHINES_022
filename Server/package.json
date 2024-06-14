@@ -24,6 +24,7 @@
   "homepage": "https://github.com/vigneshwaranbalamurugan/EONCO_MACHINES_022#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
