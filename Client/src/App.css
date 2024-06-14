@@ -4,23 +4,38 @@
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
- 
 }
 
 /* Container styling */
 .container {
   display: flex;
-  flex-direction: column;
   min-height: 81vh;
 }
 
-/* Header styling */
+.left-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.login-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Main content styling */
 .login-container {
-  flex: 1;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -34,7 +49,7 @@ h2 {
 /* Form styling */
 .login-form {
   background-color: #f9f9f9;
-  padding: 2rem;
+  padding: 5rem;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -67,17 +82,29 @@ input {
   cursor: pointer;
 }
 
-.login-button-i :hover {
+.login-image {
+  width: 75%; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 600px; /* Optional: Set a max height */
+  object-fit: cover;
+}
+
+.login-button-i:hover {
   background-color: #0056b3;
 }
 
 /* Responsive styling */
 @media (max-width: 768px) {
-  .login-form {
-    padding: 1rem;
+  .container {
+    flex-direction: column;
   }
 
-  .header, .footer {
-    padding: 0.5rem;
+  .left-side, .right-side {
+    flex: none;
+    width: 100%;
+  }
+
+  .login-form {
+    padding: 1rem;
   }
 }
