@@ -1,0 +1,67 @@
+.machine-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust the gap between cards as needed */
+}
+
+.machine-card {
+    flex: 1 1 calc(33.333% - 16px); /* Adjust to ensure three cards per row */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.card-left-right{
+    margin: 10px;
+}
+
+.machine-card p {
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.machine-card p span {
+    display: inline-block;
+    min-width: 140px;
+}
+
+.machine-card .btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.machine-card .btn-container button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.machine-card .btn-container button.update-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.machine-card .btn-container button.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Footer styling */
+  .footer {
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+  }

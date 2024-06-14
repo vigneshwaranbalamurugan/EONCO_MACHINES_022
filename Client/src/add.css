@@ -1,0 +1,56 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form button,.button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover,.button:hover{
+    background-color: #218838;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
