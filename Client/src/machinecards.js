@@ -26,7 +26,7 @@ const MachinesByHospital = ({ hospitalId }) => {
         };
 
         fetchMachines();
-    }, [hospitalId]);
+    }, [hospitalId,role]);
 
     const handleUpdateClick = async (machineId) => {
         if (!window.confirm("Are you sure you want to update?")) {
@@ -139,7 +139,7 @@ const MachinesByHospital = ({ hospitalId }) => {
                                 <p>Preventive Maintenance: {machine.Preventive_Maintanence}</p>
                                 {(role === 'Admin' || role === 'Manager') && (
                                     <div className="btn-container">
-                                        <button onClick={() => handleEditClick(machine._id, machine.Preventive_Maintanence)}>Edit</button>
+                                        <button onClick={() => handleEditClick(machine._id, machine.Preventive_Maintanence)} className="update-btn">Edit</button>
                                         <button onClick={() => handleDeleteClick(machine._id)} className="delete-btn">Delete</button>
                                     </div>
                                 )}
