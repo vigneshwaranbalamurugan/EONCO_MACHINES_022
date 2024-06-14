@@ -1,5 +1,5 @@
 import express from 'express';
-import {getDb} from '../Databaseconnection.js';
+import {getDb,closeConnection} from '../Databaseconnection.js';
 import { ObjectId} from'mongodb'
 
 const Machine_Router=express.Router();
@@ -62,6 +62,37 @@ Machine_Router.get('/machines/:hospitalId', async (req, res) => {
     } catch (error) {
         console.error('Error fetching machines:', error);
         res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+Machine_Router.put('/update/:machineId', async (req, res) => {
+    const { machineId } = req.params;
+    const { Preventive_Maintanence } = req.body;
+    const db= await getDb();
+    try {
+        const collection = await db.collection('Machines');
+        const result = await collection.updateOne(
+            { _id: new ObjectId(machineId) },
+            { $set: { Preventive_Maintanence } }
+        );
+       
+        res.json({ message: 'Machine updated successfully' });
+    } catch (error) {
+        console.error('Error updating machine:', error);
+        res.status(500).json({ error: 'Failed to update machine' });
+    }
+});
+
+Machine_Router.delete('/delete/:machineId', async (req, res) => {
+    const { machineId } = req.params;
+    const db= await getDb();
+    try {
+        const collection = await db.collection('Machines'); 
+        const result = await collection.deleteOne({ _id: new ObjectId(machineId) });
+        res.json({ message: 'Machine deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting machine:', error);
+        res.status(500).json({ error: 'Failed to delete machine' });
     }
 });
 
