@@ -19,19 +19,19 @@ The Integrated Hospital Equipment Care System is designed to manage the preventi
 
 1. **Clone the repository**
     ```sh
-    git clone https://github.com/your-username/integrated-hospital-equipment-care-system.git
-    cd integrated-hospital-equipment-care-system
+    git clone https://github.com/vigneshwaranbalamurugan/EONCO_MACHINES_022.git
+    cd EONCO_MACHINES_022
     ```
 
 2. **Install dependencies for the backend**
     ```sh
-    cd backend
+    cd server
     npm install
     ```
 
 3. **Install dependencies for the frontend**
     ```sh
-    cd ../frontend
+    cd ../client
     npm install
     ```
 
@@ -45,13 +45,13 @@ The Integrated Hospital Equipment Care System is designed to manage the preventi
 
 5. **Run the backend server**
     ```sh
-    cd backend
+    cd server
     npm start
     ```
 
 6. **Run the frontend development server**
     ```sh
-    cd ../frontend
+    cd ../client
     npm start
     ```
 
