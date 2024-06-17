@@ -70,6 +70,43 @@ The Integrated Hospital Equipment Care System is designed to manage the preventi
     - Monitor equipment status
     - Generate and view reports
 
+## **Screenshots**
+
+<br>
+
+1.**Login Page**
+
+<br>
+  <img src="./Screenshots/Login Page.jpeg" alt="Login Page" />
+  <br>
+  
+2.**Admin Dashboard**
+
+<br>
+  <img src="./Screenshots/Admin Dashboard.jpeg" alt="Admin Dashboard" />
+
+3.**Machines Add Page**
+
+<br>
+  <img src="./Screenshots/Machines Add Page.jpeg" alt="Machines Add Page" />
+
+<br>
+
+4.**Physist Dashboard**
+
+<br>
+  <img src="./Screenshots/Physist Dashboard.jpeg" alt="Physist Dashboard" />
+
+<br>
+
+5.**Database**
+
+<br>
+  <img src="./Screenshots/Database.png" alt="Dashboard" />
+
+<br>
+
+
 ## Authors
 - [**ShriraamMKS**](https://github.com/Shriraam-6219)
 - [**VigneshwaranB**](https://github.com/VigneshwaranB)
