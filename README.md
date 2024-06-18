@@ -115,3 +115,4 @@ The Integrated Hospital Equipment Care System is designed to manage the preventi
 ## Acknowledgements
 
 This project was developed as part of the Web Technology Laboratory course at Kongu Engineering College.
+
