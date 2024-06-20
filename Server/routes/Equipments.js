@@ -1,5 +1,5 @@
 import express from 'express';
-import {getDb,closeConnection} from '../Databaseconnection.js';
+import {getDb,closeConnection} from '../Db_connection/Databaseconnection.js';
 import { ObjectId} from'mongodb'
 
 const Machine_Router=express.Router();

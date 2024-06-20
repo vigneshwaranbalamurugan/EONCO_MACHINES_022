@@ -1,5 +1,5 @@
 import express from 'express';
-import { closeConnection, getDb} from '../Databaseconnection.js';
+import { getDb,closeConnection} from '../Db_connection/Databaseconnection.js';
 import { ObjectId } from 'mongodb';
 const Hospital_Router = express.Router();
 
