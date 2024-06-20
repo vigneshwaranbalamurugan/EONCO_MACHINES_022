@@ -1,7 +1,7 @@
 import React from 'react';
 import MachinesByHospital from './machinecards';
-import './card.css'
-import Navbar from './Navbar';
+import '../styles/card.css';
+import Navbar from '../Layout/Navbar';
 const Machine = () => {
     // Replace with actual hospitalId you want to fetch machines for
     const hospitalId = localStorage.getItem('id');

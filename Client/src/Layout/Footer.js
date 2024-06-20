@@ -1,4 +1,4 @@
-import './App.css'
+import '../styles/login.css'
 
 const Footer = () => (
     <footer className="footer">

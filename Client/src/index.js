@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider,Navigate} from 'react-router-dom';
-import LoginPage from './App';
-import Layout from './Layout';
+import LoginPage from './components/login';
+import Layout from './Layout/Layout';
 import reportWebVitals from './reportWebVitals';
-import LoginPag from './admin';
-import Machine from './machineshsptl';
-import AddMachineForm from './addmachines';
+import LoginPag from './components/admin';
+import Machine from './components/machineshsptl';
+import AddMachineForm from './components/addmachines';
 
 const IsLogging=localStorage.getItem('IsLogging');
 console.log(IsLogging);

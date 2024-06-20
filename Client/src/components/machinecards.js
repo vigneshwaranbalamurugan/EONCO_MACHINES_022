@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './card.css';
+import '../styles/card.css';
 
 const MachinesByHospital = ({ hospitalId }) => {
     const [machines, setMachines] = useState([]);
