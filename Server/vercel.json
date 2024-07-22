@@ -2,7 +2,7 @@
 {
     "buildCommand": "cd Client && npm install && npm run build",
     "outputDirectory": "Client/build",
-    "framework": "Reactjs",
+    "framework": "create-react-app",
     "rewrites": [
       { "source": "/hsptl/(.*)", "destination": "/server.js" },
       { "source": "/admin/(.*)", "destination": "/server.js" },
