@@ -8,7 +8,7 @@ dotenv.config();
 
 const Login_Router = express.Router();
 
-Login_Router.post('',async(req,res)=>{
+Login_Router.post('/',async(req,res)=>{
     const {email,password}=req.body;
     const db=await getDb();
     const collection=db.collection('admins');
