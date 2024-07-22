@@ -75,7 +75,7 @@ const AddMachineForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, make, Maintanence, dateOfManufacture, purchaseDate, warrantyDate } = formData;
+        const { name, make,dateOfManufacture, purchaseDate, warrantyDate } = formData;
         const nameRegex = /^[A-Za-z ]{5,100}$/;
         const makeRegex = /^[A-Za-z ]{1,200}$/;
        
