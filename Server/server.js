@@ -31,12 +31,6 @@ app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 });
 
-app.get("/api/hello/", (req, res) => {
-    res.json({
-        message: "Hello World"
-    });
-});
-
 app.use('/hsptl',Hospital_Router);
 app.use('/admin',Admin_Router);
 app.use('/reqs',Requirements_Router);
