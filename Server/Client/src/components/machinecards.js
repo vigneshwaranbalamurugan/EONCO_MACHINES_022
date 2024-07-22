@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/card.css';
+import Loader from './Loader';
 
 const MachinesByHospital = ({ hospitalId }) => {
     const [machines, setMachines] = useState([]);
     const [editId, setEditId] = useState(null);
     const [newPreventiveMaintenance, setNewPreventiveMaintenance] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const [loading, setLoading] = useState(false);
     const role = localStorage.getItem('role');
 
     useEffect(() => {
         if(!role){
             return;
         }
+        
         const fetchMachines = async () => {
+            setLoading(true);
             try {
-                const response = await fetch(`http://localhost:5000/equip/machines/${hospitalId}`);
+                const response = await fetch(`/equip/machines/${hospitalId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch machines');
                 }
@@ -22,7 +26,9 @@ const MachinesByHospital = ({ hospitalId }) => {
                 setMachines(data);
             } catch (error) {
                 console.error('Error fetching machines:', error);
-            }
+            }finally {
+                setLoading(false);
+              }
         };
 
         fetchMachines();
@@ -32,8 +38,9 @@ const MachinesByHospital = ({ hospitalId }) => {
         if (!window.confirm("Are you sure you want to update?")) {
             return;
         }
+        setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5000/equip/update/${machineId}`, {
+            const response = await fetch(`/equip/update/${machineId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,13 +63,16 @@ const MachinesByHospital = ({ hospitalId }) => {
             setNewPreventiveMaintenance('');
         } catch (error) {
             console.error('Error updating machine:', error);
-        }
+        }finally {
+            setLoading(false);
+          }
     };
 
     const handleDeleteClick = async (machineId) => {
         if (window.confirm('Are you sure you want to delete this machine?')) {
+            setLoading(true);
             try {
-                const response = await fetch(`http://localhost:5000/equip/delete/${machineId}`, {
+                const response = await fetch(`/equip/delete/${machineId}`, {
                     method: 'DELETE',
                 });
                 if (!response.ok) {
@@ -74,7 +84,9 @@ const MachinesByHospital = ({ hospitalId }) => {
                 setMachines(updatedMachines);
             } catch (error) {
                 console.error('Error deleting machine:', error);
-            }
+            }finally {
+                setLoading(false);
+              }
         }
     };
 
@@ -99,6 +111,7 @@ const MachinesByHospital = ({ hospitalId }) => {
 
     return (
         <div>
+            {loading && <Loader/>}
             <h2>Machines at Hospital</h2>
             
             

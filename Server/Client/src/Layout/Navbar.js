@@ -9,7 +9,7 @@ const Navbar = () => {
         // Clear all local storage
         localStorage.removeItem('IsLogging');
         localStorage.clear();
-        navigate('/login');
+        navigate('/');
     };
 
     return (

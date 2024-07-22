@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import '../styles/login.css';
 import login from '../styles/Login.png';
+import Loader from './Loader';
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,11 +36,15 @@ const LoginPage = () => {
      }
     } catch (error) {
       alert('Login failed. Please try again.');
+    }finally {
+      setLoading(false);
     }
   };
-
+  
   return (
-    <div className="container">
+    <div className="container"> {loading && 
+        <Loader />
+      }
       <div className="left-side">
         <img src={login} alt="Login Visual"  className="login-image" />
       </div>
@@ -55,6 +63,7 @@ const LoginPage = () => {
                 required
               />
             </div>
+           
             <div className="input-group">
               <label htmlFor="password">Password:</label>
               <input

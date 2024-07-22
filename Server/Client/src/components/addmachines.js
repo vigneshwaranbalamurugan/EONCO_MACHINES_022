@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/add.css';
+import Loader from './Loader';
 
 const AddMachineForm = () => {
     const [formData, setFormData] = useState({
@@ -20,16 +21,19 @@ const AddMachineForm = () => {
     const [treatmentTypes, setTreatmentTypes] = useState([]);
     const [machineProtocols, setMachineProtocols] = useState([]);
     const [machineTypes, setMachineTypes] = useState([]);
+    const [loading, setLoading] = useState(false);
+
     const id = localStorage.getItem('id');
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDropdownData = async () => {
+            setLoading(true);
             try {
                 const [treatmentRes, protocolRes, typeRes] = await Promise.all([
-                    fetch('http://localhost:5000/equip/treatment-types').then((res) => res.json()),
-                    fetch('http://localhost:5000/equip/machine-protocols').then((res) => res.json()),
-                    fetch('http://localhost:5000/equip/machine-types').then((res) => res.json()),
+                    fetch('/equip/treatment-types').then((res) => res.json()),
+                    fetch('/equip/machine-protocols').then((res) => res.json()),
+                    fetch('/equip/machine-types').then((res) => res.json()),
                 ]);
 
                 setTreatmentTypes(treatmentRes);
@@ -37,12 +41,15 @@ const AddMachineForm = () => {
                 setMachineTypes(typeRes);
             } catch (error) {
                 console.error('Error fetching dropdown data:', error);
-            }
+            }finally {
+                setLoading(false);
+              }
         };
 
         const fetchMachines = async () => {
+            setLoading(true);
             try {
-                const response = await fetch(`http://localhost:5000/hsptl/name/${id}`);
+                const response = await fetch(`/hsptl/name/${id}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch hospital name');
                 }
@@ -53,7 +60,9 @@ const AddMachineForm = () => {
                 }));
             } catch (error) {
                 console.error('Error fetching hospital name:', error);
-            }
+            }finally {
+                setLoading(false);
+              }
         };
 
         fetchMachines();
@@ -100,7 +109,8 @@ const AddMachineForm = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/equip', {
+            setLoading(true);
+            const response = await fetch('/equip', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,11 +140,16 @@ const AddMachineForm = () => {
         } catch (error) {
             console.error('Error adding machine:', error);
             alert('An error occurred while adding the machine.');
-        }
+        }finally {
+            setLoading(false);
+          }
     };
 
     return (
         <form onSubmit={handleSubmit}>
+            {loading && 
+        <Loader />
+      }
             <div>
                 <label>Machine Name:</label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} />

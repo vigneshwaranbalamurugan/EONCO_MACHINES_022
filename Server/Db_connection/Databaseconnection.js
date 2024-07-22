@@ -4,10 +4,7 @@ let db,client;
 
 async function connectToMongoDB() {
     try {
-      client = await MongoClient.connect(process.env.MONGODB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      client = await MongoClient.connect(process.env.MONGODB_URL);
       db = client.db(process.env.Db);
       console.log(`Connected to MongoDB: ${process.env.Db}`);
     } catch (err) {

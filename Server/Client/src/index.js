@@ -18,10 +18,10 @@ const router = createBrowserRouter(
       path: '/',
       element: <Layout />,
       children: [
-       {path:"login",element:<LoginPage/>},
+       {index: true,element:<LoginPage/>},
        {path:"add",element:IsLogging?<AddMachineForm/>:<Navigate to="/login" />},
        {path:"machines", element:IsLogging?<Machine/> :<Navigate to="/login" />},
-       {path:"admin", element:IsLogging ? <LoginPag/> :<Navigate to="/login" />}
+       {path:"admin", element:IsLogging ? <LoginPag/> :<Navigate to="/login" />},
       ]
     }
   ]
