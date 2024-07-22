@@ -4,7 +4,7 @@ import { getDb ,closeConnection} from './Db_connection/Databaseconnection.js'
 import dotenv from 'dotenv';
 import path from 'path';
 import core from 'cors';
-import cors from 'cors';
+import { fileURLToPath } from 'url';
 import Hospital_Router from './routes/hospitals.js';
 import Admin_Router from './routes/admincreate.js';
 import Requirements_Router from './routes/Requirements.js';
@@ -37,11 +37,12 @@ app.use('/reqs',Requirements_Router);
 app.use('/login',Login_Router);
 app.use('/equip',Machine_Router);
 
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, './Client/build')));
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, './Client/build/index.html'));
+app.use(express.static(path.join(__dirname, '/Client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/Client/build/index.html'));
 });
 
 const port = process.env.PORT;
