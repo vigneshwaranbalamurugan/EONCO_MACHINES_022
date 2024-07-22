@@ -9,6 +9,10 @@
       { "source": "/reqs/(.*)", "destination": "/server.js" },
       { "source": "/login/(.*)", "destination": "/server.js" },
       { "source": "/equip/(.*)", "destination": "/server.js" },
+      {
+        "source": "/api/(.*)",
+        "destination": "/server.js"
+    },
       { "source": "/(.*)", "destination": "/Client/build/index.html" }
     ],
     "env": {
