@@ -10,7 +10,7 @@
         { "src": "/reqs/(.*)", "dest": "/server.js" },
         { "src": "/login/(.*)", "dest": "/server.js" },
         { "src": "/equip/(.*)", "dest": "/server.js" },
-        { "src": "/(.*)", "dest": "/Client/build/$1" }
+        { "src": "/(.*)", "dest": "/Client/build/index.html" }
 
     ],
     "env": {
