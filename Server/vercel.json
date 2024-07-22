@@ -1,18 +1,26 @@
-
 {
-    "buildCommand": "cd Client && npm install && npm run build",
-    "framework": "create-react-app",
-    "rewrites": [
-      { "source": "/hsptl/(.*)", "destination": "/server.js" },
-      { "source": "/admin/(.*)", "destination": "/server.js" },
-      { "source": "/reqs/(.*)", "destination": "/server.js" },
-      { "source": "/login/(.*)", "destination": "/server.js" },
-      { "source": "/equip/(.*)", "destination": "/server.js" },
-      { "source": "/(.*)", "destination": "/Client/build/index.html" }
-    ],
-    "env": {
-      "MONGO_URL": "mongodb+srv://vigneshwaranb:Vickykutty2005@cluster0.7rln6de.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-      "PORT": "5000"
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "Client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "Client/build" }
     }
+  ],
+  "routes": [
+    { "src": "/hsptl/(.*)", "dest": "/server.js" },
+    { "src": "/admin/(.*)", "dest": "/server.js" },
+    { "src": "/reqs/(.*)", "dest": "/server.js" },
+    { "src": "/login/(.*)", "dest": "/server.js" },
+    { "src": "/equip/(.*)", "dest": "/server.js" },
+    { "src": "/(.*)", "dest": "/Client/build/index.html" }
+  ],
+  "env": {
+    "MONGO_URL": "mongodb+srv://vigneshwaranb:Vickykutty2005@cluster0.7rln6de.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "PORT": "5000"
   }
-  
+}
