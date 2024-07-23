@@ -3,8 +3,7 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node",
-      "buildcommand": "npm start"   
+      "use": "@vercel/node"
      }
   ]
 }
