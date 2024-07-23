@@ -7,7 +7,7 @@
   "scripts": {
     "install": "(cd Client && npm install) && (cd .. && npm install)",
     "build": "cd Client && npm run build",
-    "start": "npm start",
+    "start": "nodemon server.js",
     "deploy": "vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
