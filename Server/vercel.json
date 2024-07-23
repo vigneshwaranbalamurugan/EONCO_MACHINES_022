@@ -1,17 +1,16 @@
 {
     "version": 2,
-    "builds": [
-      { "src": "/Client/package.json", "use": "@vercel/static-build", "config": { "distDir": "build" } },
-      { "src": "/server.js", "use": "@vercel/node" }
+    "builds":[
+      {
+      "src":"./sever.js",
+      "use":"@vercel/node"
+      }
     ],
-    "routes": [
-        { "src": "/hsptl/(.*)", "dest": "/server.js" },
-        { "src": "/admin/(.*)", "dest": "/server.js" },
-        { "src": "/reqs/(.*)", "dest": "/server.js" },
-        { "src": "/login/(.*)", "dest": "/server.js" },
-        { "src": "/equip/(.*)", "dest": "/server.js" },
-        { "src": "/(.*)", "dest": "/Client/build/$1" }
-
+    "routes":[
+      {
+        "src":"/(.*)",
+        "dest":"/"
+      }
     ],
     "env": {
       "MONGO_URL": "mongodb+srv://vigneshwaranb:Vickykutty2005@cluster0.7rln6de.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
