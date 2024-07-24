@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDb,closeConnection} from '../Db_connection/Databaseconnection.js';
+import { getDb} from '../Db_connection/Databaseconnection.js';
 import bcrypt from "bcryptjs";
 
 const Admin_Router = express.Router();
@@ -23,9 +23,10 @@ Admin_Router.post('',async(req,res)=>{
         return res.status(201).json({ message: 'Admin Created Sucessfully.' });
     }catch (error) {
         console.error('Error creating admin:', error);
-      }finally{
-        await closeConnection();
-      }
+    }
+    // finally{
+    //     await closeConnection();
+    //   }
 
 });
 

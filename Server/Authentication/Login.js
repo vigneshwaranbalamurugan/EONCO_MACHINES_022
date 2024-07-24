@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { getDb,closeConnection} from '../Db_connection/Databaseconnection.js';
+import { getDb} from '../Db_connection/Databaseconnection.js';
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 
@@ -21,11 +21,8 @@ Login_Router.post('/',async(req,res)=>{
         res.status(201).json({ message: 'Login Sucessfull.',token:token,user:User});
 
     }catch(error){
-        console.log(error);
+        // console.log(error);
         return res.status(409).json({ message: 'Invalid email or password' });
-
-    }finally{
-        await closeConnection();
     }
 });
 

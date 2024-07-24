@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getDb ,closeConnection} from './Db_connection/Databaseconnection.js'
+import { connectToMongoDB} from './Db_connection/Databaseconnection.js'
 import dotenv from 'dotenv';
 import path from 'path';
 import core from 'cors';
@@ -18,14 +18,7 @@ app.use(core());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-const db = await getDb();
-if (!db) {
-    console.log('Database connection not ready');
-}else{
-    await closeConnection();
-}
-
+connectToMongoDB();
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
