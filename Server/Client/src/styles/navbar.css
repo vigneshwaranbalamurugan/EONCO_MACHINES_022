@@ -26,3 +26,9 @@
     background-color: #ddd;
     color: black;
 }
+
+@media (max-width: 576px) {
+    .navbar-item {
+        padding: 10px 12px;
+    }
+}
