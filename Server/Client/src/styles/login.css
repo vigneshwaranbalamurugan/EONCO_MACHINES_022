@@ -10,7 +10,8 @@
 .container {
   display: flex;
   width: 100%;
-  min-height: 81vh;
+  min-height: 70vh;
+  flex-wrap: wrap; 
 }
 
 .left-side {
@@ -22,8 +23,12 @@
 
 .login-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  max-width: 600px;
+  max-height: 100%; 
+  padding: 1rem;
+  box-sizing: border-box; 
 }
 
 .right-side {
@@ -31,17 +36,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* Main content styling */
 .login-container {
-  margin: 0;
-  display: flex;
   width: 100%;
+  max-width: 400px; 
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-sizing: border-box; 
 }
 
 h2 {
@@ -51,7 +60,6 @@ h2 {
 /* Form styling */
 .login-form {
   background-color: #f9f9f9;
-  padding: 2rem; /* Decreased from 5rem to 2rem */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -105,6 +113,13 @@ input {
   .left-side, .right-side {
     flex: none;
     width: 100%;
+  }
+  .login-image {
+    max-width: 100%;
+  }
+
+  .login-container {
+    max-width: 90%;
   }
 
   .login-form {

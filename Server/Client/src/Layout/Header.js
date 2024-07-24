@@ -2,7 +2,7 @@ import '../styles/login.css'
 
 const Header = () => (
     <header className="header">
-      <h1>Integreted Hospital Equipment Care System</h1>
+      <h3>Integreted Hospital Equipment Care System</h3>
     </header>
   );
 
