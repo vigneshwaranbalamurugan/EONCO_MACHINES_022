@@ -5,12 +5,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "install": "npm install",
-    "build": "cd Client && npm install && npm run build",
-    "start": "nodemon server.js",
-    "deploy": "vercel --prod",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "install": "(cd Client && npm install) && (cd .. && npm install)",
+  "build": "cd Client && npm run build",
+  "start": "node server.js",
+  "deploy": "vercel --prod",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vigneshwaranbalamurugan/EONCO_MACHINES_022.git"
