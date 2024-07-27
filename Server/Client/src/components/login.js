@@ -37,7 +37,7 @@ const LoginPage = () => {
         setTimeout(
           () => {
             navigate('/machines');
-          },100
+          },2000
         );
       } else {
         setToastData({ color: 'red', message: result.message });
