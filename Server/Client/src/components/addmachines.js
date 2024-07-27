@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/add.css';
 import Loader from './Loader';
+import { useToast } from './toaster';
 
 const AddMachineForm = () => {
     const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const AddMachineForm = () => {
     const [machineProtocols, setMachineProtocols] = useState([]);
     const [machineTypes, setMachineTypes] = useState([]);
     const [loading, setLoading] = useState(false);
+    const setToastData = useToast();
 
     const id = localStorage.getItem('id');
     const navigate = useNavigate();
@@ -73,6 +75,9 @@ const AddMachineForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const cancelbutton =() =>{
+        navigate('/machines');
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { name, make,dateOfManufacture, purchaseDate, warrantyDate } = formData;
@@ -119,7 +124,7 @@ const AddMachineForm = () => {
             });
 
             if (response.ok) {
-                alert('Machine added successfully.');
+                setToastData({color:'green',message:'Machine added sucessfully!'});
                 setFormData({
                     name: '',
                     treate_type: '',
@@ -139,7 +144,7 @@ const AddMachineForm = () => {
             }
         } catch (error) {
             console.error('Error adding machine:', error);
-            alert('An error occurred while adding the machine.');
+            setToastData({color:'red',message:'An error occurred while adding the machine!'});
         }finally {
             setLoading(false);
           }
@@ -211,7 +216,7 @@ const AddMachineForm = () => {
             </div>
             <div className="button-row">
             <button type="submit">Add Machine</button>
-           <a href="/machines" class="button">Cancel</a>
+            <button onClick={cancelbutton} style={{backgroundColor:'red'}}>Cancel</button>
            </div>
     
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider,Navigate} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { ToastProvider } from './components/toaster';
 import LoginPage from './components/login';
 import Layout from './Layout/Layout';
 import reportWebVitals from './reportWebVitals';
@@ -8,7 +9,7 @@ import LoginPag from './components/admin';
 import Machine from './components/machineshsptl';
 import AddMachineForm from './components/addmachines';
 
-const IsLogging=localStorage.getItem('IsLogging');
+const IsLogging = localStorage.getItem('IsLogging');
 console.log(IsLogging);
 
 
@@ -18,10 +19,10 @@ const router = createBrowserRouter(
       path: '/',
       element: <Layout />,
       children: [
-       {index: true,element:<LoginPage/>},
-       {path:"add",element:IsLogging?<AddMachineForm/>:<Navigate to="/login" />},
-       {path:"machines", element:IsLogging?<Machine/> :<Navigate to="/login" />},
-       {path:"admin", element:IsLogging ? <LoginPag/> :<Navigate to="/login" />},
+        { index: true, element: <LoginPage /> },
+        { path: "add", element: IsLogging ? <AddMachineForm /> : <Navigate to="/login" /> },
+        { path: "machines", element: IsLogging ? <Machine /> : <Navigate to="/login" /> },
+        { path: "admin", element: IsLogging ? <LoginPag /> : <Navigate to="/login" /> },
       ]
     }
   ]
@@ -30,7 +31,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
   </React.StrictMode>
 );
 

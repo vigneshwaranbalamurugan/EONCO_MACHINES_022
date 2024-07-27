@@ -3,7 +3,9 @@
     flex-wrap: wrap;
     gap: 1rem; /* Adjust the gap between cards as needed */
 }
-
+.bold-card{
+    font-weight: bold;
+}
 .machine-card {
     flex: 1 1 calc(33.333% - 16px); /* Adjust to ensure three cards per row */
     box-sizing: border-box;
@@ -19,14 +21,23 @@
 }
 
 .machine-card p {
-    margin: 4px 0;
+    margin: 8px 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center; /* Align items vertically center */
+}
+
+.machine-card p strong {
+    min-width: 180px;
+    max-width: 100px; /* Adjust the width of labels as needed */ /* Center align labels */
 }
 
 .machine-card p span {
-    display: inline-block;
-    min-width: 140px;
+    flex: 1;
+    text-align: left;
+    flex-wrap:nowrap;
+    min-width: 180px; /* Left align values */
 }
 
 .machine-card .btn-container {
