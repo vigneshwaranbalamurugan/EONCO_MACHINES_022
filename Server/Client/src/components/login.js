@@ -31,7 +31,6 @@ const LoginPage = () => {
       if (response.ok) {
         setToastData({ color: 'green', message: result.message });
         const token = result.token;
-        console.log(result.user);
         document.cookie = `token=${token}; path=/`;
         localStorage.setItem('id', result.user.hospital);
         login(result.user.Roll);

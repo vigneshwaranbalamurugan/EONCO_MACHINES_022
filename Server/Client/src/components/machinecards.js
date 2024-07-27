@@ -4,6 +4,7 @@ import Loader from './Loader';
 import { useToast } from './toaster';
 import { useAuth } from './authContext';
 
+
 const MachinesByHospital = ({ hospitalId }) => {
     const [machines, setMachines] = useState([]);
     const [editId, setEditId] = useState(null);
@@ -11,7 +12,6 @@ const MachinesByHospital = ({ hospitalId }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const { userRole } = useAuth();
-
     const setToastData=useToast();
 
     useEffect(() => {
@@ -157,6 +157,7 @@ const MachinesByHospital = ({ hospitalId }) => {
                         <div>
                             <p><strong>Preventive Maintenance:</strong><span>{machine.Preventive_Maintanence}</span></p>
                             {(userRole === 'Admin' || userRole === 'Manager') && (
+
                                 <div className="btn-container">
                                     <button onClick={() => handleEditClick(machine._id, machine.Preventive_Maintanence)} className="update-btn">Edit</button>
                                     <button onClick={() => handleDeleteClick(machine._id)} className="delete-btn">Delete</button>

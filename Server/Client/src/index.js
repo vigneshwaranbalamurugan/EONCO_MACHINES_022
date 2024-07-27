@@ -24,12 +24,16 @@ const createRoutes = (isLoggedIn) => [
   },
 ];
 
+
+
 const AppRouter = () => {
   const { isLoggedIn } = useAuth();
   const routes = createRoutes(isLoggedIn);
 
+
   return <RouterProvider router={createBrowserRouter(routes)} />;
 };
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -46,8 +46,10 @@ export const ToastProvider = ({ children }) => {
           padding: '0 15px',
         }}
       />
+
     </ToastContext.Provider>
   );
 };
 
 export const useToast = () => useContext(ToastContext);
+
