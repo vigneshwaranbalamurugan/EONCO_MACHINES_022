@@ -20,9 +20,9 @@ const router = createBrowserRouter(
       element: <Layout />,
       children: [
         { index: true, element: <LoginPage /> },
-        { path: "add", element: IsLogging ? <AddMachineForm /> : <Navigate to="/login" /> },
-        { path: "machines", element: IsLogging ? <Machine /> : <Navigate to="/login" /> },
-        { path: "admin", element: IsLogging ? <LoginPag /> : <Navigate to="/login" /> },
+        { path: "add", element: IsLogging ? <AddMachineForm /> : <Navigate to="/" /> },
+        { path: "machines", element: IsLogging ? <Machine /> : <Navigate to="/" /> },
+        { path: "admin", element: IsLogging ? <LoginPag /> : <Navigate to="/" /> },
       ]
     }
   ]
