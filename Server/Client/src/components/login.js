@@ -33,8 +33,12 @@ const LoginPage = () => {
         console.log(result.user);
         localStorage.setItem('id', result.user.hospital);
         localStorage.setItem('role', result.user.Roll);
-        navigate('/machines');
         localStorage.setItem('IsLogging', true);
+        setTimeout(
+          () => {
+            navigate('/machines');
+          },100
+        );
       } else {
         setToastData({ color: 'red', message: result.message });
       }
