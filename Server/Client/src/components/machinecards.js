@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/card.css';
 import Loader from './Loader';
 import { useToast } from './toaster';
+import { useAuth } from './authContext';
 
 const MachinesByHospital = ({ hospitalId }) => {
     const [machines, setMachines] = useState([]);
@@ -9,11 +10,12 @@ const MachinesByHospital = ({ hospitalId }) => {
     const [newPreventiveMaintenance, setNewPreventiveMaintenance] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false);
-    const role = localStorage.getItem('role');
+    const { userRole } = useAuth();
+
     const setToastData=useToast();
 
     useEffect(() => {
-        if(!role){
+        if(!userRole){
             return;
         }
         
@@ -34,7 +36,7 @@ const MachinesByHospital = ({ hospitalId }) => {
         };
 
         fetchMachines();
-    }, [hospitalId,role]);
+    }, [hospitalId,userRole]);
 
     const handleUpdateClick = async (machineId) => {
         if (!window.confirm("Are you sure you want to update?")) {
@@ -154,7 +156,7 @@ const MachinesByHospital = ({ hospitalId }) => {
                     ) : (
                         <div>
                             <p><strong>Preventive Maintenance:</strong><span>{machine.Preventive_Maintanence}</span></p>
-                            {(role === 'Admin' || role === 'Manager') && (
+                            {(userRole === 'Admin' || userRole === 'Manager') && (
                                 <div className="btn-container">
                                     <button onClick={() => handleEditClick(machine._id, machine.Preventive_Maintanence)} className="update-btn">Edit</button>
                                     <button onClick={() => handleDeleteClick(machine._id)} className="delete-btn">Delete</button>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './components/authContext';
 import { ToastProvider } from './components/toaster';
 import LoginPage from './components/login';
 import Layout from './Layout/Layout';
@@ -9,31 +10,34 @@ import LoginPag from './components/admin';
 import Machine from './components/machineshsptl';
 import AddMachineForm from './components/addmachines';
 
-const IsLogging = localStorage.getItem('IsLogging');
-console.log(IsLogging);
+// Function to create routes based on login status
+const createRoutes = (isLoggedIn) => [
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: isLoggedIn ? <Navigate to="/machines"/> :<LoginPage/> },
+      { path: 'add', element: isLoggedIn ? <AddMachineForm /> : <Navigate to="/" /> },
+      { path: 'machines', element: isLoggedIn ? <Machine /> : <Navigate to="/" /> },
+      { path: 'admin', element: isLoggedIn ? <LoginPag /> : <Navigate to="/" /> },
+    ],
+  },
+];
 
+const AppRouter = () => {
+  const { isLoggedIn } = useAuth();
+  const routes = createRoutes(isLoggedIn);
 
-const router = createBrowserRouter(
-  [
-    {
-      path: '/',
-      element: <Layout />,
-      children: [
-        { index: true, element: <LoginPage /> },
-        {path:"login",element:IsLogging?<Machine/>:<LoginPage/>},
-        { path: "add", element: IsLogging ? <AddMachineForm /> : <Navigate to="/login" /> },
-        { path: "machines", element: IsLogging ? <Machine /> : <Navigate to="/login" /> },
-        { path: "admin", element: IsLogging ? <LoginPag /> : <Navigate to="/login" /> },
-      ]
-    }
-  ]
-);
+  return <RouterProvider router={createBrowserRouter(routes)} />;
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ToastProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
     </ToastProvider>
   </React.StrictMode>
 );

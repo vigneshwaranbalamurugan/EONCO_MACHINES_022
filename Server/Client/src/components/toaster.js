@@ -29,7 +29,23 @@ export const ToastProvider = ({ children }) => {
   return (
     <ToastContext.Provider value={setToastData}>
       {children}
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{
+          width: 'auto',
+          maxWidth: '100%',
+          zIndex: 9999,
+          padding: '0 15px',
+        }}
+      />
     </ToastContext.Provider>
   );
 };

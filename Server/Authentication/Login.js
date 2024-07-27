@@ -18,8 +18,8 @@ Login_Router.post('/',async(req,res)=>{
             return res.status(409).json({ message: 'Invalid email or password' });
         } 
         const token = jwt.sign({email:User.email}, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(201).json({ message: 'Login Sucessfull.',token:token,user:User});
-
+        const userAuth={hospital:User.hospital,Roll:User.Roll}
+        res.status(201).json({ message: 'Login Sucessfull.',token:token,user:userAuth});
     }catch(error){
         // console.log(error);
         return res.status(409).json({ message: 'Invalid email or password' });
