@@ -1,0 +1,27 @@
+/* toastStyles.css */
+.toast-green {
+    border-bottom: 4px solid green !important;
+    background-color: #f9f9f9 !important;
+    color: black !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px !important;
+    padding: 0.75rem !important;
+  }
+  
+  .toast-red {
+    border-bottom: 4px solid red !important;
+    background-color: #f9f9f9 !important;
+    color: black !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px !important;
+    padding: 0.75rem !important;
+  }
+  
+  .Toastify__toast-container {
+    width: auto !important;
+  }
+  
+  .Toastify__toast {
+    margin-bottom: 1rem !important;
+  }
+  

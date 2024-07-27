@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import '../styles/login.css';
 import login from '../styles/Login.png';
 import Loader from './Loader';
+import { useToast } from './toaster';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const setToastData = useToast();
+  const navigate = useNavigate();
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,32 +26,31 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
       const result = await response.json();
-     if(response.ok){
-      alert(result.message);
-      const token = result.token;
-      document.cookie = `token=${token}; path=/`;
-      console.log(result.user);
-
-      localStorage.setItem('id', result.user.hospital);
-      localStorage.setItem('role', result.user.Roll);
-      window.location.href = '/machines';
-      localStorage.setItem('IsLogging', true);
-     }else{
-      alert(result.message);
-     }
+      if (response.ok) {
+        setToastData({ color: 'green', message: result.message });
+        const token = result.token;
+        document.cookie = `token=${token}; path=/`;
+        console.log(result.user);
+        localStorage.setItem('id', result.user.hospital);
+        localStorage.setItem('role', result.user.Roll);
+        navigate('/machines');
+        localStorage.setItem('IsLogging', true);
+      } else {
+        setToastData({ color: 'red', message: result.message });
+      }
     } catch (error) {
-      alert('Login failed. Please try again.');
-    }finally {
+      setToastData({ color: 'red', message: 'Login failed. Please try again.' });
+    } finally {
       setLoading(false);
     }
   };
-  
+
   return (
-    <div className="container"> {loading && 
-        <Loader />
-      }
+    <div className="container"> {loading &&
+      <Loader />
+    }
       <div className="left-side">
-        <img src={login} alt="Login Visual"  className="login-image" />
+        <img src={login} alt="Login Visual" className="login-image" />
       </div>
       <div className="right-side">
         <main className="login-container">
@@ -63,7 +67,7 @@ const LoginPage = () => {
                 required
               />
             </div>
-           
+
             <div className="input-group">
               <label htmlFor="password">Password:</label>
               <input
