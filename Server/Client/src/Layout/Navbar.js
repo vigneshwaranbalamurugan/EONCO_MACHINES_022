@@ -1,23 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../components/authContext';
 import '../styles/navbar.css'
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const Role=localStorage.getItem('role');
+    const { logout } = useAuth(); 
+    const { userRole } = useAuth();
     const handleLogout = () => {
-        // Clear all local storage
-        localStorage.removeItem('IsLogging');
+        logout();
         localStorage.clear();
-        navigate('/');
     };
 
     return (
         <nav className="navbar">
             <ul className="navbar-list">
-                <li className='navbar-item'>Welcome,{Role}</li>
+                <li className='navbar-item'>Welcome,{userRole}</li>
                 <li className="navbar-item" onClick={() => navigate('/machines')}>Dashboard</li>
-                <li className="navbar-item" onClick={() => navigate('/add')}>Add</li>
+               { userRole === 'Admin' && <li className="navbar-item" onClick={() => navigate('/add')}>Add</li>}
                 <li className="navbar-item" onClick={handleLogout}>Logout</li>
             </ul>
         </nav>

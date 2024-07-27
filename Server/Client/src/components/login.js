@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import '../styles/login.css';
-import login from '../styles/Login.png';
+import loginn from '../styles/Login.png';
 import Loader from './Loader';
 import { useToast } from './toaster';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './authContext';
 
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth(); 
   const setToastData = useToast();
   const navigate = useNavigate();
 
@@ -30,14 +32,12 @@ const LoginPage = () => {
         setToastData({ color: 'green', message: result.message });
         const token = result.token;
         document.cookie = `token=${token}; path=/`;
-        console.log(result.user);
         localStorage.setItem('id', result.user.hospital);
-        localStorage.setItem('role', result.user.Roll);
-        localStorage.setItem('IsLogging', true);
+        login(result.user.Roll);
         setTimeout(
           () => {
             navigate('/machines');
-          },2000
+          }, 1000
         );
       } else {
         setToastData({ color: 'red', message: result.message });
@@ -54,7 +54,7 @@ const LoginPage = () => {
       <Loader />
     }
       <div className="left-side">
-        <img src={login} alt="Login Visual" className="login-image" />
+        <img src={loginn} alt="Login Visual" className="login-image" />
       </div>
       <div className="right-side">
         <main className="login-container">
