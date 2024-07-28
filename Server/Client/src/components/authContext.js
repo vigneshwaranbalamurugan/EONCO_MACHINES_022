@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const AuthContext = createContext();
 
@@ -9,6 +11,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole,setUserRole] = useState('');
+  const navigate = useNavigate();
+
   const login = (role) => {
     setUserRole(role);
     setIsLoggedIn(true);
@@ -17,6 +21,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUserRole('');
     setIsLoggedIn(false);
+    navigate('/');
   };
 
   return (
