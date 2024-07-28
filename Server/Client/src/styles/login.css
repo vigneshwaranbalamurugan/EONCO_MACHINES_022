@@ -44,6 +44,7 @@
 .login-container {
   width: 100%;
   max-width: 400px; 
+  text-align: left; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,6 +98,7 @@ input {
   width: 75%; /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
   max-height: 600px; /* Optional: Set a max height */
+  border-radius: 2rem;
   object-fit: cover;
 }
 
@@ -104,18 +106,39 @@ input {
   background-color: #0056b3;
 }
 
+.login-detail{
+  font-size:30px;
+  font-weight:bolder;
+  align-self: flex-start; /* Align to the left */
+  text-align: left
+}
+
+.login-logo {
+  width: 100px; /* Default width */
+  max-width: 100%; /* Ensure it doesn't exceed container width */
+  height: auto; 
+  margin-bottom: 1rem; 
+  border-radius: 1rem;/* Space between logo and text */
+}
+
+.login-quote{
+  align-self: flex-start; /* Align to the left */
+  text-align: left; /* Text align left */
+  margin-left: 0;
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
-
+  
   .left-side, .right-side {
     flex: none;
     width: 100%;
   }
   .login-image {
-    max-width: 100%;
+    max-width: 60%;
   }
 
   .login-container {
@@ -129,5 +152,24 @@ input {
 
   input {
     padding: 0.75rem; /* Retain the larger padding for inputs */
+  }
+
+  .login-logo {
+    width: 80px; /* Adjust width for smaller screens */
+  }
+}
+
+@media (max-width: 573px) {
+  .left-side{
+    display: none;
+  }
+  .login-detail{
+    font-size:medium;
+    align-self:center; /* Align to the left */
+    text-align:center;
+  }
+  .login-quote{
+    align-self:center; /* Align to the left */
+    text-align:center;
   }
 }

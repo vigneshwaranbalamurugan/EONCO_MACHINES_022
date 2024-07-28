@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/login.css';
-import loginn from '../styles/Login.png';
+import loginn from '../assets/Login.png';
 import Loader from './Loader';
+import loginLogo from '../assets/Logo_IMS.jpg';
 import { useToast } from './toaster';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './authContext';
@@ -58,15 +59,19 @@ const LoginPage = () => {
       </div>
       <div className="right-side">
         <main className="login-container">
-          <h2>Login</h2>
+          <img src={loginLogo} alt="IMS Portal Logo" className="login-logo"/>
+          <p className='login-detail'>Get Started with IMS Portal</p>
+          <br/>
+          <p className='login-quote'>Your Tools for Better Health</p>
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
-              <label htmlFor="email">Email:</label>
+              <label htmlFor="email">Email address:</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 value={email}
+                placeholder='Enter email address'
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -78,6 +83,7 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 name="password"
+                placeholder='Enter password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
