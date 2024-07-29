@@ -22,7 +22,9 @@ const createRoutes = (isLoggedIn) => [
         </ProtectedRoute>
       ), },
       { path: 'machines', element: (
+        <ProtectedRoute isLoggedIn={isLoggedIn}>
           <Machine />
+        </ProtectedRoute>
       ), },
       { path: 'admin', element: (
         <ProtectedRoute isLoggedIn={isLoggedIn}>
