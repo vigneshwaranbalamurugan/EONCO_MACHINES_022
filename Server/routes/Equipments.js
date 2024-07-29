@@ -34,14 +34,10 @@ Machine_Router.post('', async (req, res) => {
 });
 
 Machine_Router.get('/treatment-types', async (req, res) => {
-    try{
     const db = await getDb();
     const treatmentTypes = await db.collection('Treatment_Type').find().toArray();
     // console.log(treatmentTypes);
     res.json(treatmentTypes);
-    }catch(error){
-        console.log('error');
-    }
 });
 
 Machine_Router.get('/machine-protocols', async (req, res) => {
