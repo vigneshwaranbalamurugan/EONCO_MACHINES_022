@@ -41,7 +41,7 @@ const createRoutes = (isLoggedIn) => [
 
 const AppRouter = () => {
   useEffect(() => {
-    changeFavicon(favicon);
+    changeFavicon('./assets/favicon.ico');
   }, []); // Empty dependency array ensures it runs once on mount
 
   const changeFavicon = (favicon) => {
