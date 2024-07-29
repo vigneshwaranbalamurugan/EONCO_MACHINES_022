@@ -33,10 +33,10 @@ app.use('/equip',Machine_Router);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, '/Client/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/Client/build/index.html'));
-});
+// app.use(express.static(path.join(__dirname, '/Client/build')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/Client/build/index.html'));
+// });
 
 const port = process.env.PORT;
 app.listen(port, () => {
