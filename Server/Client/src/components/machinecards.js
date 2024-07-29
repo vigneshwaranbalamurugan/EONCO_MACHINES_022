@@ -57,7 +57,7 @@ const MachinesByHospital = ({ hospitalId }) => {
                 throw new Error('Failed to update machine');
             }
             const result = await response.json();
-            setToastData({ color: 'green', message: result.message });
+            setToastData({ status:'success', message: result.message });
             const updatedMachines = machines.map(machine => {
                 if (machine._id === machineId) {
                     return { ...machine, Preventive_Maintanence: newPreventiveMaintenance };
@@ -69,7 +69,7 @@ const MachinesByHospital = ({ hospitalId }) => {
             setNewPreventiveMaintenance('');
         } catch (error) {
             console.error('Error updating machine:', error);
-            setToastData({ color: 'red', message: error });
+            setToastData({status:'failure', message: error});
         } finally {
             setLoading(false);
         }
@@ -86,12 +86,12 @@ const MachinesByHospital = ({ hospitalId }) => {
                     throw new Error('Failed to delete machine');
                 }
                 const result = await response.json();
-                setToastData({ color: 'green', message: result.message });
+                setToastData({ status:'success', message: result.message});
                 const updatedMachines = machines.filter(machine => machine._id !== machineId);
                 setMachines(updatedMachines);
             } catch (error) {
                 console.error('Error deleting machine:', error);
-                setToastData({ color: 'red', message: error });
+                setToastData({ status:'failure', message: error });
             } finally {
                 setLoading(false);
             }

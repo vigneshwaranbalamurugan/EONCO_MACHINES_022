@@ -9,7 +9,7 @@ const ProtectedRoute = ({ isLoggedIn, children }) => {
     useEffect(() => {
         if (!isLoggedIn) {
             navigate('/');
-            setToastData({ color: 'red', message: 'You are not Authenticated' });
+            setToastData({ status:'failure', message: 'You are not Authenticated' });
         }
     }, [isLoggedIn, navigate, setToastData]);
 

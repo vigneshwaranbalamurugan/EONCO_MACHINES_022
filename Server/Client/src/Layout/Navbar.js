@@ -12,7 +12,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logout();
-        setToastData({color:'green',message:'Logged out successfully!'});
+        setToastData({status:'success',message:'Logged out successfully!'});
         localStorage.clear();
         navigate('/');
     };
