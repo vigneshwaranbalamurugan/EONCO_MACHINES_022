@@ -5,7 +5,6 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "cd Client &&  npm run build",
     "start": "nodemon server.js",
     "deploy": "vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
