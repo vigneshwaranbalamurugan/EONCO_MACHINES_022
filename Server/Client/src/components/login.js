@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/login.css';
-import loginn from '../styles/Login.png';
+import loginn from '../assets/Login.png';
 import Loader from './Loader';
+import loginLogo from '../assets/Logo_IMS.jpg';
 import { useToast } from './toaster';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './authContext';
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { login } = useAuth(); 
   const setToastData = useToast();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const LoginPage = () => {
       });
       const result = await response.json();
       if (response.ok) {
-        setToastData({ color: 'green', message: result.message });
+        setToastData({ status:'success', message: result.message});
         const token = result.token;
         document.cookie = `token=${token}; path=/`;
         localStorage.setItem('id', result.user.hospital);
@@ -40,48 +42,64 @@ const LoginPage = () => {
           }, 1000
         );
       } else {
-        setToastData({ color: 'red', message: result.message });
+        setToastData({ status:'failure', message: result.message });
       }
     } catch (error) {
-      setToastData({ color: 'red', message: 'Login failed. Please try again.' });
+      setToastData({ status:'failure', message: 'Login failed. Please try again.'});
     } finally {
       setLoading(false);
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+
   return (
-    <div className="container"> {loading &&
+    <div className="head-container"> {loading &&
       <Loader />
     }
-      <div className="left-side">
+      <div className="login-left-side">
         <img src={loginn} alt="Login Visual" className="login-image" />
       </div>
-      <div className="right-side">
+      <div className="login-right-side">
         <main className="login-container">
-          <h2>Login</h2>
+          <img src={loginLogo} alt="IMS Portal Logo" className="login-logo"/>
+          <p className='login-detail'>Get Started with IMS Portal</p>
+          <br/>
+          <p className='login-quote'>Your Tools for Better Health</p>
           <form className="login-form" onSubmit={handleLogin}>
-            <div className="input-group">
-              <label htmlFor="email">Email:</label>
+            <div className="login-input-group">
+              <label htmlFor="email">Email address:</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 value={email}
+                placeholder='Enter email address'
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
 
-            <div className="input-group">
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+            <div className="login-input-group">
+            <label htmlFor="password">Password:</label>
+            <div className="login-password-input-wrapper">
+                <input
+                  type={isPasswordVisible ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <span className="login-password-toggle-icon" onClick={togglePasswordVisibility}>
+                  {isPasswordVisible ? '🙈' : '👁️'}
+                </span>
+              </div>
+
             </div>
             <button className="login-button-i" type="submit">Login</button>
           </form>

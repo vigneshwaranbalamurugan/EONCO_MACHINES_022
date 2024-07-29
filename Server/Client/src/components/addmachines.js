@@ -43,9 +43,9 @@ const AddMachineForm = () => {
                 setMachineTypes(typeRes);
             } catch (error) {
                 console.error('Error fetching dropdown data:', error);
-            }finally {
+            } finally {
                 setLoading(false);
-              }
+            }
         };
 
         const fetchMachines = async () => {
@@ -62,9 +62,9 @@ const AddMachineForm = () => {
                 }));
             } catch (error) {
                 console.error('Error fetching hospital name:', error);
-            }finally {
+            } finally {
                 setLoading(false);
-              }
+            }
         };
 
         fetchMachines();
@@ -75,15 +75,15 @@ const AddMachineForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const cancelbutton =() =>{
+    const cancelbutton = () => {
         navigate('/machines');
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, make,dateOfManufacture, purchaseDate, warrantyDate } = formData;
+        const { name, make, dateOfManufacture, purchaseDate, warrantyDate } = formData;
         const nameRegex = /^[A-Za-z ]{5,100}$/;
         const makeRegex = /^[A-Za-z ]{1,200}$/;
-       
+
 
         if (!nameRegex.test(name)) {
             alert('Machine name must be alphabets and length between 5 to 100 characters.');
@@ -95,7 +95,7 @@ const AddMachineForm = () => {
             return;
         }
 
-       
+
 
         const today = new Date();
         if (new Date(dateOfManufacture) >= today || new Date(purchaseDate) >= today) {
@@ -124,7 +124,7 @@ const AddMachineForm = () => {
             });
 
             if (response.ok) {
-                setToastData({color:'green',message:'Machine added sucessfully!'});
+                setToastData({ status: 'success', message: 'Machine added sucessfully!' });
                 setFormData({
                     name: '',
                     treate_type: '',
@@ -144,81 +144,83 @@ const AddMachineForm = () => {
             }
         } catch (error) {
             console.error('Error adding machine:', error);
-            setToastData({color:'red',message:'An error occurred while adding the machine!'});
-        }finally {
+            setToastData({ status: 'failure', message: 'An error occurred while adding the machine!' });
+        } finally {
             setLoading(false);
-          }
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            {loading && 
-        <Loader />
-      }
-            <div>
-                <label>Machine Name:</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} />
+        <form className="add-form"formonSubmit={handleSubmit}>
+            {loading &&
+                <Loader />
+            }
+            <div className="add-form-group">
+                <div>
+                    <label>Machine Name:</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Machine Make:</label>
+                    <input type="text" name="make" value={formData.make} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Treatment Type:</label>
+                    <select name="treate_type" value={formData.treate_type} onChange={handleChange}>
+                        <option value="">Select Treatment Type</option>
+                        {treatmentTypes.map((type) => (
+                            <option key={type._id} value={type.Type}>{type.Type}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label>Machine Protocol:</label>
+                    <select name="machine_prtocl" value={formData.machine_prtocl} onChange={handleChange}>
+                        <option value="">Select Machine Protocol</option>
+                        {machineProtocols.map((protocol) => (
+                            <option key={protocol._id} value={protocol.Prtotocol}>{protocol.Prtotocol}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label>Machine Type:</label>
+                    <select name="machine_type" value={formData.machine_type} onChange={handleChange}>
+                        <option value="">Select Machine Type</option>
+                        {machineTypes.map((type) => (
+                            <option key={type._id} value={type.Type}>{type.Type}</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label>Hospital Name:</label>
+                    <input type="text" name="hsptl_name" value={formData.hsptl_name} readOnly />
+                </div>
+                <div>
+                    <label>Date of Manufacture:</label>
+                    <input type="date" name="dateOfManufacture" value={formData.dateOfManufacture} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Purchase Date:</label>
+                    <input type="date" name="purchaseDate" value={formData.purchaseDate} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Warranty Date:</label>
+                    <input type="date" name="warrantyDate" value={formData.warrantyDate} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Count:</label>
+                    <input type="number" name="count" value={formData.count} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Maintenance:</label>
+                    <input type="text" name="Maintanence" value={formData.Maintanence} onChange={handleChange} />
+                </div>
             </div>
-            <div>
-                <label>Machine Make:</label>
-                <input type="text" name="make" value={formData.make} onChange={handleChange} />
+            <div className="add-button-row">
+                <button type="submit">Add Machine</button>
+                <button onClick={cancelbutton} style={{ backgroundColor: 'red' }}>Cancel</button>
             </div>
-            <div>
-                <label>Treatment Type:</label>
-                <select name="treate_type" value={formData.treate_type} onChange={handleChange}>
-                    <option value="">Select Treatment Type</option>
-                    {treatmentTypes.map((type) => (
-                        <option key={type._id} value={type.Type}>{type.Type}</option>
-                    ))}
-                </select>
-            </div>
-            <div>
-                <label>Machine Protocol:</label>
-                <select name="machine_prtocl" value={formData.machine_prtocl} onChange={handleChange}>
-                    <option value="">Select Machine Protocol</option>
-                    {machineProtocols.map((protocol) => (
-                        <option key={protocol._id} value={protocol.Prtotocol}>{protocol.Prtotocol}</option>
-                    ))}
-                </select>
-            </div>
-            <div>
-                <label>Machine Type:</label>
-                <select name="machine_type" value={formData.machine_type} onChange={handleChange}>
-                    <option value="">Select Machine Type</option>
-                    {machineTypes.map((type) => (
-                        <option key={type._id} value={type.Type}>{type.Type}</option>
-                    ))}
-                </select>
-            </div>
-            <div>
-                <label>Hospital Name:</label>
-                <input type="text" name="hsptl_name" value={formData.hsptl_name} readOnly />
-            </div>
-            <div>
-                <label>Date of Manufacture:</label>
-                <input type="date" name="dateOfManufacture" value={formData.dateOfManufacture} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Purchase Date:</label>
-                <input type="date" name="purchaseDate" value={formData.purchaseDate} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Warranty Date:</label>
-                <input type="date" name="warrantyDate" value={formData.warrantyDate} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Count:</label>
-                <input type="number" name="count" value={formData.count} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Maintenance:</label>
-                <input type="text" name="Maintanence" value={formData.Maintanence} onChange={handleChange} />
-            </div>
-            <div className="button-row">
-            <button type="submit">Add Machine</button>
-            <button onClick={cancelbutton} style={{backgroundColor:'red'}}>Cancel</button>
-           </div>
-    
+
 
         </form>
     );

@@ -1,0 +1,83 @@
+.confirm-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .confirm-popup-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .confirm-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .confirm-popup-icon {
+    font-size: 50px;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+  }
+  
+  .confirm-popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .confirm-cancel-button,
+  .confirm-Delete-button,
+  .confirm-Update-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .confirm-cancel-button {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .confirm-Delete-button {
+    background-color: #ff6b6b;
+    color: white;
+  }
+
+  .confirm-Update-button {
+    background-color: #6bb3ff;
+        color: black;
+  }
+  
+  .confirm-cancel-button:hover {
+    background-color: #d4d4d4;
+  }
+  
+  .confirm-Delete-button:hover {
+    background-color: #ff5252;
+  }
+  
+  .confirm-Update-button:hover {
+    background-color: #52eeff;
+  }
+  

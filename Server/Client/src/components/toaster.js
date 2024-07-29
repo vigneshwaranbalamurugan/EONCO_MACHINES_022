@@ -11,8 +11,13 @@ export const ToastProvider = ({ children }) => {
 
   useEffect(() => {
     if (toastData) {
-      const { message, color } = toastData;
-      toast(message, {
+      const { message, status} = toastData;
+
+      
+      toast( <div>
+        <span style={{ marginRight: '8px' }}>{status==='success'?'✅':'❌'}</span>
+        {message}
+      </div>, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -20,7 +25,7 @@ export const ToastProvider = ({ children }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        className: `toast-${color}`,
+        className: `toast-${status==='success'?'green':'red'}`,
       });
       setToastData(null); 
     }
