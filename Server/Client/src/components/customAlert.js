@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, AlertTitle, IconButton, Box, Typography } from '@mui/material';
+import {  IconButton, Box, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import CloseIcon from '@mui/icons-material/Close';
 

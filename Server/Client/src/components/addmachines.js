@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/add.css';
 import Loader from './Loader';
 import { useToast } from './toaster';
@@ -28,7 +28,7 @@ const AddMachineForm = () => {
     const [alertMessage, setAlert] = useState('');
     const [isAlert, setIsAlert] = useState(false);
     const id = localStorage.getItem('id');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDropdownData = async () => {
@@ -80,7 +80,7 @@ const AddMachineForm = () => {
     };
 
     const cancelbutton = () => {
-        // navigate('/machines');
+        navigate('/machines');
     }
 
     const handleSubmit = async (e) => {
@@ -153,7 +153,7 @@ const AddMachineForm = () => {
                     count: '',
                     Maintanence: '',
                 });
-                // navigate("/machines");
+                 navigate("/machines");
             } else {
                 throw new Error('Error adding machine.');
             }
