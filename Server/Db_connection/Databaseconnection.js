@@ -6,7 +6,7 @@ export async function connectToMongoDB() {
     try {
       client = await MongoClient.connect(process.env.MONGODB_URL);
       db = client.db(process.env.Db);
-      // console.log(`Connected to MongoDB: ${process.env.Db}`);
+      console.log(`Connected to MongoDB: ${process.env.Db}`);
     } catch (err) {
       console.error('Error connecting to MongoDB', err);
     }

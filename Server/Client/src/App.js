@@ -7,6 +7,7 @@ import LoginPag from './components/admin';
 import Machine from './components/machineshsptl';
 import AddMachineForm from './components/addmachines';
 import ProtectedRoute from './components/protectedRoutes';
+import Check from './components/check';
 import ErrorPage from './components/errorPage';
 // Function to create routes based on login status
 const createRoutes = (isLoggedIn) => [
@@ -31,6 +32,7 @@ const createRoutes = (isLoggedIn) => [
           <LoginPag />
         </ProtectedRoute>
       ), },
+      {path:'check',element:<Check/>}
     ],
   },
 ];

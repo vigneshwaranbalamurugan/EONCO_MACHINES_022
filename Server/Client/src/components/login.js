@@ -3,6 +3,7 @@ import '../styles/login.css';
 import loginn from '../assets/Login.png';
 import Loader from './Loader';
 import loginLogo from '../assets/Logo_IMS.jpg';
+import hide from '../assets/hide.png';
 import { useToast } from './toaster';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './authContext';
@@ -27,13 +28,12 @@ const LoginPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
       const result = await response.json();
       if (response.ok) {
         setToastData({ status:'success', message: result.message});
-        const token = result.token;
-        document.cookie = `token=${token}; path=/`;
         localStorage.setItem('id', result.user.hospital);
         login(result.user.Roll);
         setTimeout(
@@ -96,7 +96,7 @@ const LoginPage = () => {
                   required
                 />
                 <span className="login-password-toggle-icon" onClick={togglePasswordVisibility}>
-                  {isPasswordVisible ? '🙈' : '👁️'}
+                  {isPasswordVisible ? <img src={hide} alt="hide"/> : '👁️'}
                 </span>
               </div>
 

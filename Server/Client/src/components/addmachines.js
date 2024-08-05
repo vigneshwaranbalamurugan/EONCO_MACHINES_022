@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import '../styles/add.css';
 import Loader from './Loader';
 import { useToast } from './toaster';
+import CustomAlert from './customAlert';
 
 const AddMachineForm = () => {
     const [formData, setFormData] = useState({
@@ -24,9 +25,10 @@ const AddMachineForm = () => {
     const [machineTypes, setMachineTypes] = useState([]);
     const [loading, setLoading] = useState(false);
     const setToastData = useToast();
-
+    const [alertMessage, setAlert] = useState('');
+    const [isAlert, setIsAlert] = useState(false);
     const id = localStorage.getItem('id');
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDropdownData = async () => {
@@ -42,6 +44,7 @@ const AddMachineForm = () => {
                 setMachineProtocols(protocolRes);
                 setMachineTypes(typeRes);
             } catch (error) {
+                setToastData({ status: 'failure', message: 'Error fetching dropdown data!' });
                 console.error('Error fetching dropdown data:', error);
             } finally {
                 setLoading(false);
@@ -61,6 +64,7 @@ const AddMachineForm = () => {
                     hsptl_name: data.hosp.hsptl_name,
                 }));
             } catch (error) {
+                setToastData({ status: 'failure', message: 'Error fetching hospital name!' });
                 console.error('Error fetching hospital name:', error);
             } finally {
                 setLoading(false);
@@ -76,40 +80,51 @@ const AddMachineForm = () => {
     };
 
     const cancelbutton = () => {
-        navigate('/machines');
+        // navigate('/machines');
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { name, make, dateOfManufacture, purchaseDate, warrantyDate } = formData;
         const nameRegex = /^[A-Za-z ]{5,100}$/;
         const makeRegex = /^[A-Za-z ]{1,200}$/;
 
-
         if (!nameRegex.test(name)) {
-            alert('Machine name must be alphabets and length between 5 to 100 characters.');
+            setAlert('Name field must be alphabets and between minimum 5 and maximum 200 characters.');
+            setIsAlert(true);
             return;
         }
 
-        if (!makeRegex.test(make)) {
-            alert('Make field must be alphabets and maximum 200 characters.');
+        if (!makeRegex.test(make)) {            
+            setAlert('Make field must be alphabets and maximum 200 characters.');
+            setIsAlert(true);
             return;
         }
-
-
+        if (formData.name === '' || formData.treat_type === '' || formData.make === '' ||
+            formData.machine_prtocl === '' || formData.machine_type === '' || formData.hsptl_name === '' ||
+            formData.dateOfManufacture === '' || formData.purchaseDate === '' || formData.warrantyDate === '' ||
+            formData.count === '' || formData.maintenance === '') {
+            setAlert('Please fill all required fields');
+            setIsAlert(true);
+            return;
+        }
 
         const today = new Date();
         if (new Date(dateOfManufacture) >= today || new Date(purchaseDate) >= today) {
-            alert('Manufacture date and purchase date must be less than today.');
+            setAlert('Manufacture date and purchase date must be less than today.');
+            setIsAlert(true);
             return;
         }
 
         if (new Date(purchaseDate) <= new Date(dateOfManufacture)) {
-            alert('Purchase date must be greater than the date of manufacture.');
+            setAlert('Purchase date must be greater than the date of manufacture.');
+            setIsAlert(true);
             return;
         }
 
         if (new Date(warrantyDate) <= new Date(purchaseDate)) {
-            alert('Warranty date must be greater than the purchase date.');
+            setAlert('Warranty date must be greater than the purchase date.');
+            setIsAlert(true);
             return;
         }
 
@@ -138,7 +153,7 @@ const AddMachineForm = () => {
                     count: '',
                     Maintanence: '',
                 });
-                navigate("/machines");
+                // navigate("/machines");
             } else {
                 throw new Error('Error adding machine.');
             }
@@ -151,9 +166,17 @@ const AddMachineForm = () => {
     };
 
     return (
-        <form className="add-form"formonSubmit={handleSubmit}>
+        <form className="add-form">
             {loading &&
                 <Loader />
+            }
+            {
+                isAlert && <CustomAlert
+                    title="Info"
+                    message={alertMessage}
+                    severity="info"
+                    onCancel={() => setIsAlert(false)}
+                />
             }
             <div className="add-form-group">
                 <div>
@@ -217,7 +240,7 @@ const AddMachineForm = () => {
                 </div>
             </div>
             <div className="add-button-row">
-                <button type="submit">Add Machine</button>
+                <button onClick={handleSubmit}>Add Machine</button>
                 <button onClick={cancelbutton} style={{ backgroundColor: 'red' }}>Cancel</button>
             </div>
 

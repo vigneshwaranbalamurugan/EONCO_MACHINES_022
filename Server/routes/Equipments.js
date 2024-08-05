@@ -4,7 +4,7 @@ import { ObjectId} from'mongodb'
 
 const Machine_Router=express.Router();
 
-Machine_Router.post('', async (req, res) => {
+Machine_Router.post('/', async (req, res) => {
     
     const db=await getDb();
     try {
