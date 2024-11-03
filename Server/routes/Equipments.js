@@ -1,15 +1,15 @@
 import express from 'express';
-import {getDb,closeConnection} from '../Databaseconnection.js';
+import {getDb} from '../Db_connection/Databaseconnection.js';
 import { ObjectId} from'mongodb'
 
 const Machine_Router=express.Router();
 
-Machine_Router.post('', async (req, res) => {
+Machine_Router.post('/', async (req, res) => {
     
     const db=await getDb();
     try {
         const { name, treate_type, make,machine_prtocl,machine_type,hsptl_name , dateOfManufacture, purchaseDate, warrantyDate, count,Maintanence} = req.body;
-        console.log(hsptl_name);
+        // console.log(hsptl_name);
         const collection = db.collection('hospitals');
         const validBranch = await collection.findOne({ hsptl_name});
         const collections = db.collection('Machines');
@@ -28,7 +28,7 @@ Machine_Router.post('', async (req, res) => {
         });
         return res.status(201).json({ message: 'Machine added successfully.' });
     } catch (error) {
-        console.error('Error adding machine:', error);
+        // console.error('Error adding machine:', error);
         return res.status(500).json({ message: 'An error occurred while adding the machine.' });
     }
 });
@@ -36,7 +36,7 @@ Machine_Router.post('', async (req, res) => {
 Machine_Router.get('/treatment-types', async (req, res) => {
     const db = await getDb();
     const treatmentTypes = await db.collection('Treatment_Type').find().toArray();
-    console.log(treatmentTypes);
+    // console.log(treatmentTypes);
     res.json(treatmentTypes);
 });
 
@@ -55,12 +55,12 @@ Machine_Router.get('/machine-types', async (req, res) => {
 Machine_Router.get('/machines/:hospitalId', async (req, res) => {
     const hospitalId = req.params.hospitalId;
     const db = await getDb();
-    console.log(hospitalId);
+    // console.log(hospitalId);
     try {
         const machines = await db.collection('Machines').find({ hospitalId: new ObjectId(hospitalId) }).toArray();       
          res.json(machines);
     } catch (error) {
-        console.error('Error fetching machines:', error);
+        // console.error('Error fetching machines:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -71,14 +71,14 @@ Machine_Router.put('/update/:machineId', async (req, res) => {
     const db= await getDb();
     try {
         const collection = await db.collection('Machines');
-        const result = await collection.updateOne(
+        await collection.updateOne(
             { _id: new ObjectId(machineId) },
             { $set: { Preventive_Maintanence } }
         );
        
         res.json({ message: 'Machine updated successfully' });
     } catch (error) {
-        console.error('Error updating machine:', error);
+        // console.error('Error updating machine:', error);
         res.status(500).json({ error: 'Failed to update machine' });
     }
 });
@@ -88,10 +88,10 @@ Machine_Router.delete('/delete/:machineId', async (req, res) => {
     const db= await getDb();
     try {
         const collection = await db.collection('Machines'); 
-        const result = await collection.deleteOne({ _id: new ObjectId(machineId) });
+        await collection.deleteOne({ _id: new ObjectId(machineId) });
         res.json({ message: 'Machine deleted successfully' });
     } catch (error) {
-        console.error('Error deleting machine:', error);
+        // console.error('Error deleting machine:', error);
         res.status(500).json({ error: 'Failed to delete machine' });
     }
 });

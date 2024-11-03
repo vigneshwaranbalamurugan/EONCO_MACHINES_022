@@ -1,0 +1,101 @@
+.machine-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Adjust the gap between cards as needed */
+}
+.bold-card{
+    font-weight: bold;
+}
+.machine-card {
+    flex: 1 1 calc(33.333% - 16px); /* Adjust to ensure three cards per row */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.card-left-right{
+    margin: 10px;
+}
+
+.machine-card p {
+    margin: 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically center */
+}
+
+.machine-card p strong {
+    min-width: 180px;
+    max-width: 100px; /* Adjust the width of labels as needed */ /* Center align labels */
+}
+
+.machine-card p span {
+    flex: 1;
+    text-align: left;
+    flex-wrap:nowrap;
+    min-width: 180px; /* Left align values */
+}
+
+.machine-card .btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.machine-card .btn-container button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.machine-card .btn-container button.update-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.machine-card .btn-container button.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 0.9rem;
+    text-align: center;
+  }
+  
+  /* Footer styling */
+  .layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+/* Optional: Add padding to your content */
+  }
+  
+  .footer {
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: center;
+    padding: 0.9rem;
+    width: 100%;
+  }
+
+  @media (max-width: 992px) {
+    .machine-card {
+        flex: 1 1 calc(50% - 16px); /* Two cards per row on medium screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .machine-card {
+        flex: 1 1 calc(100% - 16px); /* One card per row on mobile screens */
+    }
+}

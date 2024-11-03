@@ -1,14 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { getDb,closeConnection} from '../Databaseconnection.js';
+import { getDb} from '../Db_connection/Databaseconnection.js';
 import bcrypt from "bcryptjs";
-import jwt from 'jsonwebtoken';
+import { encryptToken } from './jwtToken.js';
 
 dotenv.config();
 
 const Login_Router = express.Router();
 
-Login_Router.post('',async(req,res)=>{
+Login_Router.post('/',async(req,res)=>{
     const {email,password}=req.body;
     const db=await getDb();
     const collection=db.collection('admins');
@@ -17,15 +17,17 @@ Login_Router.post('',async(req,res)=>{
         if(!User || !bcrypt.compareSync(password, User.password)){
             return res.status(409).json({ message: 'Invalid email or password' });
         } 
-        const token = jwt.sign({email:User.email}, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(201).json({ message: 'Login Sucessfull.',token:token,user:User});
-
+        const encryptedToken=encryptToken(User);
+        res.cookie('auth_token', encryptedToken, {
+            httpOnly: true, // Secure flag (use 'secure: true' in production)
+            secure: true, // Ensure HTTPS in production
+            maxAge: 3600000, // 1 hour
+            sameSite: 'Strict' // Prevent CSRF
+          });
+        const userAuth={hospital:User.hospital,Roll:User.Roll}
+        res.status(201).json({ message: `Signed in as \n ${User.email}`,user:userAuth});
     }catch(error){
-        console.log(error);
         return res.status(409).json({ message: 'Invalid email or password' });
-
-    }finally{
-        await closeConnection();
     }
 });
 

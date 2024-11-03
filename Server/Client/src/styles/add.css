@@ -1,0 +1,91 @@
+.add-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    /* Increased width */
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    /* Added right and left padding */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form div {
+    margin-bottom: 15px;
+}
+
+.add-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.add-form input[type="text"],
+.add-form input[type="date"],
+.add-form input[type="number"],
+.add-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.add-form button,
+.add-button {
+    padding: 10px 10px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-form button:hover,
+.add-button:hover {
+    background-color: #218838;
+}
+
+.add-button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.add-button-row button {
+    margin: 0 5px;
+    /* Optional: Adjust spacing between buttons */
+}
+
+/* Media Query for screens greater than 768px */
+@media (min-width: 768px) {
+    .add-form {
+        max-width: 900px;
+    }
+
+    .add-form-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .add-form-group>div {
+        width: 48%;
+    }
+
+    .add-button-row {
+        width: 100%;
+    }
+}
