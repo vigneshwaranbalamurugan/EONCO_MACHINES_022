@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser'; // Use import instead of require
 import { connectToMongoDB} from './Db_connection/Databaseconnection.js'
+import pkg from 'node-jose';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
@@ -14,6 +15,9 @@ import authMiddleware from './Middleware/authToken.js';
 import appp from './Middleware/authToken.js';
 
 dotenv.config();
+const { JWE, JWK } = pkg;
+
+const encryptionKey = await JWK.createKey('oct', 256, { alg: 'A256GCM' });
 
 const app = express();
 app.use(cors({
@@ -50,3 +54,6 @@ const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`serve at http://localhost:${port}`);
 });
+
+
+export default encryptionKey;

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import pkg from 'node-jose';
 import dotenv from 'dotenv';
+import encryptionKey from '../server.js';
 
 dotenv.config();
 const { JWE, JWK } = pkg;
@@ -21,7 +22,6 @@ const generateToken = (user) => {
 }
 
 export const encryptToken = async (user) => {
-    const encryptionKey = await JWK.createKey('oct', 256, { alg: 'A256GCM' });
     const token = generateToken(user);
     const encryptedToken = await JWE.createEncrypt(
         { format: 'compact' }, 

@@ -2,14 +2,14 @@ import jwt from 'jsonwebtoken';
 import pkg from 'node-jose';
 import dotenv from 'dotenv';
 import express from 'express';
+import encryptionKey from '../server.js';
 
 dotenv.config();
 const { JWE, JWK } = pkg;
 const secret_Key = process.env.JWT_SECRET;
 const appp=express.Router();
 const decryptToken = async (encryptedToken) => {
-    const decryptionKey = await JWK.createKey('oct', 256, { alg: 'A256GCM' });
-    const decryptedResult = await JWE.createDecrypt(decryptionKey)
+    const decryptedResult = await JWE.createDecrypt(encryptionKey)
         .decrypt(encryptedToken);
     const token = decryptedResult.plaintext.toString();
     return token;
