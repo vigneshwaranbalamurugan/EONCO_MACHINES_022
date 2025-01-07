@@ -4,7 +4,7 @@
 
 The Integrated Hospital Equipment Care System is designed to manage the preventive maintenance of hospital machines and equipment, ensuring their optimal functioning to enhance patient care and hospital operations. This system is a part of a larger hospital management framework.
 
-## Features
+## Features 
 
 - **Preventive Maintenance**:Tracking of maintenance tasks.
 - **User Roles**: Different access levels for administrators, managers, and technicians.
